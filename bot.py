@@ -20,12 +20,12 @@ options.headless = True
 bot = commands.Bot(command_prefix="*", status=discord.Status.online, activity=discord.Game("*Help")) # 명령어 접두사 : *
 
 bot_info = discord.Embed(title="DJU-assistant", description="명령어 목록입니다.", color=0x2cbf60)
-bot_info.add_field(name="1. 인사", value="*Hello, hello, Hi, hi, 안녕하세요, 안녕, ㅎㅇ", inline=False)
-bot_info.add_field(name="2. 음악 재생", value="*play, p, m, music, 음악 <youtube url>", inline=False)
-bot_info.add_field(name="3. 음악 정지", value="*정지, 멈춰, 잠깐만, pause, wait, w", inline=False)
-bot_info.add_field(name="4. 음악 계속", value="*진행, 계속, resume, continue, c", inline=False)
-bot_info.add_field(name="5. 음악 종료", value="*꺼, quit, q, stop", inline=False)
-bot_info.add_field(name="6. 통화방 나가기", value="*leave, l, off, 나가, 끄기", inline=False)
+bot_info.add_field(name="1. 인사", value="*hello --> 봇이 사용자에게 인사합니다.", inline=False)
+bot_info.add_field(name="2. 음악", value="*play <youtube url> --> url에 해당하는 음악을 재생합니다."+\
+                                            "\n*pause --> 재생중인 음악을 정지합니다."+\
+                                            "\n*resume --> 정지했던 음악을 다시 재생합니다."+\
+                                            "\n*quit --> 음악을 종료합니다."+\
+                                            "\n*leave --> 봇이 통화방을 나갑니다.", inline=False)
 bot_info.set_footer(text = "made by KJH, MJY, KJH, LJM, JJY")
 
 @bot.event
