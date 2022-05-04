@@ -6,14 +6,11 @@
 # ffmpeg-5.0.1-full_build.7z install & set environment variable (https://www.gyan.dev/ffmpeg/builds/)
 # download webdriver(chrome)
 
-import discord, asyncio, os, time
+import discord
 from discord.ext import commands
 from discord import FFmpegPCMAudio
-from discord.utils import get
 from youtube_dl import YoutubeDL
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-import requests
 from bs4 import BeautifulSoup
 from secret import *
 
@@ -24,7 +21,11 @@ bot = commands.Bot(command_prefix="*", status=discord.Status.online, activity=di
 
 bot_info = discord.Embed(title="DJU-assistant", description="명령어 목록입니다.", color=0x2cbf60)
 bot_info.add_field(name="1. 인사", value="*Hello, hello, Hi, hi, 안녕하세요, 안녕, ㅎㅇ", inline=False)
-bot_info.add_field(name="2. 음악", value="*m <youtube url>", inline=False)
+bot_info.add_field(name="2. 음악 재생", value="*play, p, m, music, 음악 <youtube url>", inline=False)
+bot_info.add_field(name="3. 음악 정지", value="*정지, 멈춰, 잠깐만, pause, wait, w", inline=False)
+bot_info.add_field(name="4. 음악 계속", value="*진행, 계속, resume, continue, c", inline=False)
+bot_info.add_field(name="5. 음악 종료", value="*꺼, quit, q, stop", inline=False)
+bot_info.add_field(name="6. 통화방 나가기", value="*leave, l, off, 나가, 끄기", inline=False)
 bot_info.set_footer(text = "made by KJH, MJY, KJH, LJM, JJY")
 
 @bot.event
@@ -76,13 +77,13 @@ async def play(ctx, url):
         vc.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
     await ctx.send(embed = discord.Embed(title="MUSIC INFO", description="현재 "+url+" 을(를) 재생하고 있습니다.", color=0x2cbf60))
 
-@bot.command(aliases=["멈춰", "잠깐만"])
+@bot.command(aliases=["멈춰", "잠깐만", "정지", "wait", "w"])
 async def pause(ctx):
     if vc.is_playing():
         vc.pause()
         await ctx.send(embed=discord.Embed(title="PAUSE", description = "음악을 일시정지 했습니다.", color=0x2cbf60))
 
-@bot.command(aliases=["계속해봐", "진행", "계속", "continue"])
+@bot.command(aliases=["진행", "계속", "continue", "c"])
 async def resume(ctx):
     try:
         vc.resume()
@@ -91,7 +92,7 @@ async def resume(ctx):
     else:
         await ctx.send(embed=discord.Embed(title="RESUME", description="음악을 다시 재생했습니다.", color=0x2cbf60))
 
-@bot.command(aliases=["노래꺼", "꺼", "듣기싫어", "노잼", "빨리안꺼?"])
+@bot.command(aliases=["꺼", "q", "quit"])
 async def stop(ctx):
     if vc.is_playing():
         vc.stop()
