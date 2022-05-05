@@ -5,6 +5,7 @@
 # pip install selenium
 # ffmpeg-5.0.1-full_build.7z install & set environment variable (https://www.gyan.dev/ffmpeg/builds/)
 # download webdriver(chrome)
+# bot invite link : https://discord.com/api/oauth2/authorize?client_id=971306432903397436&permissions=8&scope=bot
 
 import discord
 from discord.ext import commands
@@ -22,10 +23,10 @@ bot = commands.Bot(command_prefix="*", status=discord.Status.online, activity=di
 bot_info = discord.Embed(title="DJU-assistant", description="명령어 목록입니다.", color=0x2cbf60)
 bot_info.add_field(name="1. 인사", value="*hello --> 봇이 사용자에게 인사합니다.", inline=False)
 bot_info.add_field(name="2. 음악", value="*play <youtube url> --> url에 해당하는 음악을 재생합니다."+\
-                                            "\n*pause --> 재생중인 음악을 정지합니다."+\
-                                            "\n*resume --> 정지했던 음악을 다시 재생합니다."+\
-                                            "\n*quit --> 음악을 종료합니다."+\
-                                            "\n*leave --> 봇이 통화방을 나갑니다.", inline=False)
+                                       "\n*pause --> 재생중인 음악을 정지합니다."+\
+                                       "\n*resume --> 정지했던 음악을 다시 재생합니다."+\
+                                       "\n*quit --> 음악을 종료합니다."+\
+                                       "\n*leave --> 봇이 통화방을 나갑니다.", inline=False)
 bot_info.set_footer(text = "made by KJH, MJY, KJH, LJM, JJY")
 
 @bot.event
@@ -102,6 +103,7 @@ async def stop(ctx):
 
 @bot.command(aliases=["l", "leave", "off", "나가", "끄기"])
 async def out(ctx):
+    await ctx.send(embed=discord.Embed(title="LEAVE", description="음성 채널에서 퇴장하였습니다.", color=0x2cbf60))
     await bot.voice_clients[0].disconnect()
 
 bot.run(token)
