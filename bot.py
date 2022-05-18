@@ -13,14 +13,16 @@ from discord import FFmpegPCMAudio
 from youtube_dl import YoutubeDL
 from selenium import webdriver
 from bs4 import BeautifulSoup
+from eng_word import get_daily_eng_words, format_words
 from secret import *
 
 options = webdriver.ChromeOptions()
 options.headless = True
 
 bot = commands.Bot(command_prefix="*", status=discord.Status.online, activity=discord.Game("*Help")) # 명령어 접두사 : *
+color_main = 0x2cbf60
 
-bot_info = discord.Embed(title="DJU-assistant", description="명령어 목록입니다.", color=0x2cbf60)
+bot_info = discord.Embed(title="DJU-assistant", description="명령어 목록입니다.", color=color_main)
 bot_info.add_field(name="1. 인사", value="*hello --> 봇이 사용자에게 인사합니다.", inline=False)
 bot_info.add_field(name="2. 음악", value="*play <youtube url> --> url에 해당하는 음악을 재생합니다."+\
                                        "\n*pause --> 재생중인 음악을 정지합니다."+\
@@ -76,13 +78,13 @@ async def play(ctx, url):
         info = ydl.extract_info(url, download=False)
         URL = info["formats"][0]["url"]
         vc.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
-    await ctx.send(embed = discord.Embed(title="MUSIC INFO", description="현재 "+url+" 을(를) 재생하고 있습니다.", color=0x2cbf60))
+    await ctx.send(embed = discord.Embed(title="MUSIC INFO", description="현재 "+url+" 을(를) 재생하고 있습니다.", color=color_main))
 
 @bot.command(aliases=["멈춰", "잠깐만", "정지", "wait", "w"])
 async def pause(ctx):
     if vc.is_playing():
         vc.pause()
-        await ctx.send(embed=discord.Embed(title="PAUSE", description = "음악을 일시정지 했습니다.", color=0x2cbf60))
+        await ctx.send(embed=discord.Embed(title="PAUSE", description = "음악을 일시정지 했습니다.", color=color_main))
 
 @bot.command(aliases=["진행", "계속", "continue", "c"])
 async def resume(ctx):
@@ -91,19 +93,25 @@ async def resume(ctx):
     except:
         await ctx.send("이어서 재생할 음악을 찾을 수 없습니다.")
     else:
-        await ctx.send(embed=discord.Embed(title="RESUME", description="음악을 다시 재생했습니다.", color=0x2cbf60))
+        await ctx.send(embed=discord.Embed(title="RESUME", description="음악을 다시 재생했습니다.", color=color_main))
 
 @bot.command(aliases=["꺼", "q", "quit"])
 async def stop(ctx):
     if vc.is_playing():
         vc.stop()
-        await ctx.send(embed=discord.Embed(title="QUIT", description="음악을 종료했습니다.", color=0x2cbf60))
+        await ctx.send(embed=discord.Embed(title="QUIT", description="음악을 종료했습니다.", color=color_main))
     else:
         await ctx.send("종료할 음악을 찾을 수 없습니다.")
 
 @bot.command(aliases=["l", "leave", "off", "나가", "끄기"])
 async def out(ctx):
-    await ctx.send(embed=discord.Embed(title="LEAVE", description="음성 채널에서 퇴장하였습니다.", color=0x2cbf60))
+    await ctx.send(embed=discord.Embed(title="LEAVE", description="음성 채널에서 퇴장하였습니다.", color=color_main))
     await bot.voice_clients[0].disconnect()
+
+@bot.command(aliases=["영단어", "단어"])
+async def eng(ctx):
+    daily_words = get_daily_eng_words()
+    result = format_words(daily_words)
+    await ctx.send(embed=discord.Embed(title="DAILY ENGLISH", description=result, color=color_main))
 
 bot.run(token)
