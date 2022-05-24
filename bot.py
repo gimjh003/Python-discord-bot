@@ -26,15 +26,15 @@ bot = commands.Bot(command_prefix="*", status=discord.Status.online, activity=di
 color_main = 0x2cbf60
 
 bot_info = discord.Embed(title="project_BOT", description="명령어 목록입니다.", color=color_main)
-bot_info.add_field(name="1. 인사", value="*hello --> 봇이 사용자에게 인사합니다.", inline=False)
-bot_info.add_field(name="2. 음악", value="*play <youtube url> --> url에 해당하는 음악을 재생합니다."+\
-                                       "\n*pause --> 재생중인 음악을 정지합니다."+\
-                                       "\n*resume --> 정지했던 음악을 다시 재생합니다."+\
-                                       "\n*quit --> 음악을 종료합니다."+\
-                                       "\n*leave --> 봇이 통화방을 나갑니다.", inline=False)
-bot_info.add_field(name="3. 공부", value="*word --> 날마다 다른 영단어 5개를 보여줍니다."+\
-                                       "\n*quote --> 랜덤한 영어 명언을 보여줍니다.", inline=False)
-bot_info.add_field(name="4. 뉴스", value="*news --> 각기 다른 주제의 뉴스 6개를 보여줍니다.", inline=False)
+bot_info.add_field(name="1. 인사", value="*hello → 봇이 사용자에게 인사합니다.", inline=False)
+bot_info.add_field(name="2. 음악", value="*play <youtube url> → url에 해당하는 음악을 재생합니다."+\
+                                       "\n*pause → 재생중인 음악을 정지합니다."+\
+                                       "\n*resume → 정지했던 음악을 다시 재생합니다."+\
+                                       "\n*quit → 음악을 종료합니다."+\
+                                       "\n*leave → 봇이 통화방을 나갑니다.", inline=False)
+bot_info.add_field(name="3. 공부", value="*word → 날마다 다른 영단어 5개를 보여줍니다."+\
+                                       "\n*quote → 랜덤한 영어 명언을 보여줍니다.", inline=False)
+bot_info.add_field(name="4. 뉴스", value="*news → 각기 다른 주제의 뉴스 6개를 보여줍니다.", inline=False)
 bot_info.set_footer(text = "made by KJH, MJY, KJH, LJM, JJY")
 
 @bot.event
