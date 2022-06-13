@@ -1,4 +1,3 @@
-# pip install pynacl
 # pip install youtube_dl
 # pip install discord
 # pip install beautifulsoup4
@@ -6,6 +5,7 @@
 # ffmpeg-5.0.1-full_build.7z install & set environment variable (https://www.gyan.dev/ffmpeg/builds/)
 # download webdriver(chrome)
 # bot invite link : https://discord.com/api/oauth2/authorize?client_id=971306432903397436&permissions=8&scope=bot
+# open source : https://drive.google.com/file/d/1AMmjM-Z923MQ6afFczMvVgJTKNA9V-Po/view?usp=sharing
 
 import discord
 from discord.ext import commands
